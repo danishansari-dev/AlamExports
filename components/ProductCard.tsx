@@ -1,0 +1,84 @@
+
+import React, { useState } from 'react';
+import { Product } from '../types';
+
+interface Props {
+  product: Product;
+}
+
+const ProductCard: React.FC<Props> = ({ product }) => {
+  const [imgLoaded, setImgLoaded] = useState(false);
+
+  return (
+    <div className="bg-white border border-neutral-200 group flex flex-col h-full shadow-sm hover:shadow-2xl hover:scale-[1.04] transition-all duration-500 ease-in-out will-change-transform overflow-hidden">
+      {/* Image Section - Fixed Aspect Ratio with Robust Placeholder */}
+      <a 
+        href={`#/product/${product.id}`} 
+        className="block relative overflow-hidden aspect-square bg-neutral-100 border-b border-neutral-100"
+      >
+        {!imgLoaded && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-stone-50 animate-pulse">
+            <div className="w-12 h-[1px] bg-neutral-200 mb-2"></div>
+            <span className="text-[8px] font-bold uppercase tracking-[0.4em] text-neutral-300">Loading SKU Image</span>
+          </div>
+        )}
+        <img 
+          src={product.image} 
+          alt={product.title} 
+          onLoad={() => setImgLoaded(true)}
+          className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+        />
+        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
+          {product.material.map(m => (
+            <span key={m} className="bg-white/95 px-2 py-0.5 text-[8px] font-bold uppercase tracking-widest border border-neutral-200 text-neutral-600 shadow-sm">
+              {m}
+            </span>
+          ))}
+        </div>
+        
+        {/* Hover Overlay Affordance */}
+        <div className="absolute inset-0 bg-neutral-900/0 group-hover:bg-neutral-900/5 transition-colors duration-500 pointer-events-none"></div>
+      </a>
+      
+      {/* Content Section */}
+      <div className="p-5 flex-grow flex flex-col">
+        <div className="flex-grow">
+          <div className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-1">
+            {product.category}
+          </div>
+          <h3 className="text-base font-bold text-neutral-900 mb-3 tracking-tight leading-tight group-hover:text-neutral-700 transition-colors">
+            {product.title}
+          </h3>
+          <p className="text-xs text-neutral-500 mb-6 leading-relaxed line-clamp-2">
+            {product.description}
+          </p>
+        </div>
+        
+        {/* Footer Section */}
+        <div className="mt-auto pt-5 border-t border-neutral-100 flex flex-col gap-3">
+          <div className="flex items-center justify-between">
+            <a 
+              href={`#/product/${product.id}`}
+              className="text-[10px] font-bold uppercase tracking-widest text-neutral-900 hover:text-neutral-500 transition-colors flex items-center group/link"
+            >
+              Technical Specs
+              <svg className="w-3 h-3 ml-1 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+            <span className="text-[9px] font-bold text-neutral-300 uppercase tracking-tighter">Export Grade</span>
+          </div>
+          
+          <a 
+            href={`#/contact?product=${encodeURIComponent(product.title)}`}
+            className="w-full text-center py-3 bg-neutral-900 text-white text-[10px] font-bold uppercase tracking-widest hover:bg-neutral-800 transition-all shadow-sm active:scale-[0.98]"
+          >
+            Inquire Now
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;
