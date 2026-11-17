@@ -136,7 +136,6 @@ AlamExports/
    ```bash
    npm run dev
    ```
-   Open your browser and navigate to `http://localhost:5173`.
 
 5. **Build for production:**
    ```bash
@@ -149,7 +148,7 @@ AlamExports/
 ## 📞 Contact & Business Inquiries
 
 - **Company**: Alam Exports
-- **Location**: Bhadohi, Uttar Pradesh, India
+- **Location**: Uttar Pradesh, India
 - **WhatsApp**: [+91 98375 48119](https://wa.me/919837548119)
 - **Email**: [sales@alamexports.com](mailto:sales@alamexports.com)
 - **Location Map**: [Google Maps](https://maps.app.goo.gl/XWxKDpPRS6bfUYFw5)
