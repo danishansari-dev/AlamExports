@@ -4,6 +4,7 @@ import { PRODUCTS } from '../data';
 import ProductImageGallery from '../components/ProductImageGallery';
 import InquiryForm from '../components/InquiryForm';
 import { analyzeImage } from '../lib/gemini';
+import SEO from '../components/SEO';
 
 const ProductDetailPage: React.FC = () => {
   const [analysis, setAnalysis] = useState<string | null>(null);
@@ -55,6 +56,16 @@ const ProductDetailPage: React.FC = () => {
 
   return (
     <div className="py-12 max-w-7xl mx-auto px-6">
+      {/* Why: Injects product-specific title, description, and Open Graph tags for search engine optimization */}
+      <SEO 
+        title={product.title}
+        description={`${product.title}: ${product.description} Available for bulk B2B wholesale and custom export from India.`}
+        canonicalPath={`#/product/${product.id}`}
+        image={product.image}
+        keywords={`${product.title}, ${product.category}, ${product.material.join(', ')}, wholesale rugs India`}
+        type="product"
+      />
+
       <nav className="mb-8 text-[10px] font-bold uppercase tracking-widest text-neutral-400">
         <a href="#/" className="hover:text-neutral-900 transition-colors">Home</a>
         <span className="mx-2">/</span>
