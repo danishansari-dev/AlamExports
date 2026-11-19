@@ -1,0 +1,8 @@
+# robots.txt for Alam Exports (www.alamexports.com)
+# Allow all search engine crawlers to index the site
+
+User-agent: *
+Allow: /
+
+# Canonical Sitemap Location
+Sitemap: https://www.alamexports.com/sitemap.xml
